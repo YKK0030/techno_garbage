@@ -19,6 +19,9 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from keras.utils import np_utils
 from sklearn.metrics import confusion_matrix
+import visualkeras
+from skimage.transform import resize 
+import keras.utils as ku
 
 data_dir = Path('Garbage\original_images')
 
@@ -139,7 +142,6 @@ model = Sequential([
     Dense(6, activation='softmax')
 ])
 
-import visualkeras
 visualkeras.layered_view(model, legend=True, spacing=20)
 
 num_cardboard_train = len(os.listdir(imagepath_cardboard_dir))
@@ -204,16 +206,7 @@ print ("Cardboard Glass Metal Paper Plastic Trash")
 ACC = (TP+TN)/(TP+FP+FN+TN)
 print (ACC)
 
-from skimage.transform import resize 
-
-import keras.utils as ku
-import numpy as np
-number_to_class = ['cardboard',\
-                   'glass',\
-                   'metal',
-                   'paper',\
-                   'plastic',\
-                   'trash',]
+number_to_class = ['cardboard',\'glass',\'metal','paper',\'plastic',\'trash',]
 
 test_x, test_y = train_data_gen.__getitem__(1)
 # test_x is used to train the data
